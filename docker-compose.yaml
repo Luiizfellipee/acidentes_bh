@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    container_name: postgres_acidentes
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+
+  metabase:
+    image: metabase/metabase:latest
+    container_name: metabase_app
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      MB_DB_TYPE: postgres
+      MB_DB_DBNAME: db_acidentes_bh
+      MB_DB_PORT: 5432
+      MB_DB_USER: postgres
+      MB_DB_PASS: acid@2026
+      MB_DB_HOST: db
+    depends_on:
+      - db
+
+volumes:
+  pgdata:

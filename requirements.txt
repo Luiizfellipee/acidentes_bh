@@ -1,0 +1,18 @@
+# Manipulação de Dados e Tratamento
+pandas
+numpy
+openpyxl
+
+# Motores para arquivos Parquet
+pyarrow
+fastparquet
+
+# Banco de Dados e Carga
+sqlalchemy
+psycopg2-binary
+
+# Segurança e Configuração
+python-dotenv
+
+# Ambiente de Desenvolvimento
+ipykernel
