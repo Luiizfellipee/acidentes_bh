@@ -1,9 +1,9 @@
 # Ambientes Virtuais
 venv/
+venv
 .env
 
 # Dados
-data/
 *.xlsx
 *.csv
 
