@@ -23,10 +23,10 @@ services:
       - "3000:3000"
     environment:
       MB_DB_TYPE: postgres
-      MB_DB_DBNAME: db_acidentes_bh
+      MB_DB_DBNAME: ${DB_NAME}
       MB_DB_PORT: 5432
-      MB_DB_USER: postgres
-      MB_DB_PASS: acid@2026
+      MB_DB_USER: ${DB_USER}
+      MB_DB_PASS: ${DB_PASSWORD}
       MB_DB_HOST: db
     depends_on:
       - db
