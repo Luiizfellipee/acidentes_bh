@@ -3,10 +3,6 @@ venv/
 venv
 .env
 
-# Dados
-*.xlsx
-*.csv
-
 # Logs e Cache
 __pycache__/
 .ipynb_checkpoints/
