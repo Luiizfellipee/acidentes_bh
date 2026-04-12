@@ -20,27 +20,12 @@ services:
     restart: always
     ports:
       - "3000:3000"
+    volumes:
+      - ./metabase_data:/metabase-data 
     environment:
-      MB_DB_TYPE: postgres
-      MB_DB_DBNAME: ${DB_NAME}
-      MB_DB_PORT: 5432
-      MB_DB_USER: ${DB_USER}
-      MB_DB_PASS: ${DB_PASSWORD}
-      MB_DB_HOST: db
+      MB_DB_FILE: /metabase-data/metabase.db
     depends_on:
       - db
 
-  portainer:
-    image: portainer/portainer-ce:latest
-    container_name: portainer
-    restart: always
-    ports:
-      - "9443:9443"
-      - "9000:9000"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - portainer_data:/data
-
 volumes:
   pgdata:
-  portainer_data:
