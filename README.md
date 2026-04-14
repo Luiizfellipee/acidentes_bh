@@ -1,93 +1,80 @@
----
+📊 Análise de Acidentes de Trânsito em Belo Horizonte (Data Analytics & DW)
+Este projeto consiste em uma solução completa de Data Analytics para o estudo e visualização de acidentes de trânsito na cidade de Belo Horizonte, utilizando dados abertos da PBH. A solução abrange desde o tratamento de dados (ETL) e modelagem dimensional em um Data Warehouse (PostgreSQL) até a visualização em dashboards interativos no Metabase.
 
-# 📊 Projeto: Análise de Acidentes de Trânsito - PBH
+O objetivo do estudo é identificar padrões críticos, como a influência da embriaguez na letalidade, regiões com maior incidência de colisões e o perfil demográfico dos envolvidos, auxiliando na compreensão da segurança viária urbana.
 
-Este projeto consiste em uma infraestrutura completa de dados para a extração, carga, modelagem e visualização de dados de acidentes de trânsito da cidade de Belo Horizonte. A arquitetura utiliza containers Docker para garantir portabilidade e escalabilidade, integrando um banco de dados PostgreSQL, uma camada de transformação (Gold Layer) e o Metabase para BI.
+🚀 Conceito Plug and Play
+Este projeto foi desenvolvido sob o conceito Plug and Play. Toda a infraestrutura de banco de dados e a configuração do dashboard (gráficos, filtros e cores) já estão pré-configuradas e persistidas. Ao subir o ambiente, você não precisará criar nenhum gráfico do zero; o painel estará pronto para consumo.
 
-## 🏗️ Arquitetura do Projeto
+🛠️ Pré-requisitos
+Para rodar este projeto, você precisará apenas de:
 
-O projeto segue o padrão de medalhão (Bronze, Silver e Gold) para organização dos dados:
+Docker e Docker Compose instalados.
 
-1. **Ingestão (Python/Pandas):** Leitura dos dados brutos e carga no PostgreSQL.
-2. **Armazenamento (PostgreSQL):** Tabelas originais no schema `public`.
-3. **Modelagem (Gold Layer):** Criação de Views otimizadas no schema `analytics` para facilitar o consumo via BI.
-4. **Visualização (Metabase):** Dashboards e mapas de calor para análise espacial e temporal.
-5. **Administração (Portainer):** Interface gráfica para monitoramento e gestão da stack de containers.
+Python 3.10+ (para execução dos scripts de carga).
 
-## 🛠️ Tecnologias Utilizadas
+📥 Instalação e Configuração
+Siga os passos abaixo para subir o ambiente na sua máquina local:
 
-* **Linguagem:** Python 3.12
-* **Banco de Dados:** PostgreSQL 15
-* **Visualização:** Metabase
-* **Orquestração:** Docker & Docker Compose
-* **Gestão de Containers:** Portainer
-* **Bibliotecas Python:** Pandas, SQLAlchemy, Psycopg2, Python-dotenv
+1. Clonar o Repositório
+Bash
+git clone https://github.com/seu-usuario/acidentes_bh.git
+cd acidentes_bh
 
-## 🚀 Como Executar o Projeto
+2. Subir a Infraestrutura (Docker)
+Este comando iniciará os contêineres do banco de dados PostgreSQL e do Metabase.
 
-### 1. Pré-requisitos
-
-* Docker e Docker Compose instalados.
-* Arquivo `.env` configurado na raiz do projeto com as credenciais do banco.
-
-### 2. Subindo a Infraestrutura
-
-No terminal, na pasta raiz do projeto, execute:
-
-```bash
+Bash
 docker-compose up -d
 
-```
+3. Instalar Dependências Python
+Recomenda-se o uso de um ambiente virtual (venv).
 
-Isso iniciará três serviços:
+Bash
+pip install -r requirements.txt
 
-* **Postgres:** Porta `5432` (Banco de dados)
-* **Metabase:** Porta `3000` (Business Intelligence)
-* **Portainer:** Portas `9000` e `9443` (Gestão de containers)
+4. Carga de Dados e Criação de Views
+Execute os scripts para popular o banco de dados e criar as camadas lógicas de análise:
 
-### 3. Carga e Transformação de Dados
+Bash
+# Injeta os dados tratados (.parquet) no Data Warehouse
+python scripts/load_dw.py
 
-Com os containers rodando, execute os scripts Python para popular o banco e criar a camada analítica:
+# Cria as views otimizadas para o dashboard
+python scripts/create_view.py
 
-```bash
-# Realiza a carga inicial dos dados brutos
-python scripts/carga_postgres.py
+📈 Acesso ao Dashboard (Metabase)
+Após os contêineres estarem rodando e os scripts finalizados, o dashboard estará disponível em: http://localhost:3000.
 
-# Cria as views da Camada Gold no schema analytics
-python sql/modelagem_dw.py
+Credenciais de Primeiro Acesso:
+Utilize os dados abaixo para visualizar os painéis Estratégico e Analítico:
 
-```
+Login/Email: devin4237@uorak.com
 
-## 📈 Camada Analítica (Gold Layer)
+Senha: xLc9cskkE7Aci5U
 
-A modelagem final foi corrigida para lidar com inconsistências de nomes de colunas originais. No Metabase, utilize as views do schema `analytics`:
+🧩 Estrutura do Projeto
+data/: Contém os dados brutos e os arquivos tratados em formato Parquet para alta performance.
 
-* `v_detalhe_acidentes`: Unifica dados de boletins, envolvidos e veículos em uma única tabela fato denormalizada.
-* `v_mapa_calor`: Contém as coordenadas geográficas (`latitude`, `longitude`) vinculadas aos boletins para análises espaciais.
+notebooks/: Jupyter Notebook com todo o processo de limpeza, normalização e tratamento de dados (Pandas).
 
-## 🐳 Gestão com Portainer
+scripts/: Scripts Python para automação do pipeline de dados e criação de Views SQL.
 
-Para monitorar o status dos containers, logs e uso de memória:
+metabase_data/: Volume persistente que armazena a inteligência do dashboard (essencial para o Plug and Play).
 
-1. Acesse `http://localhost:9000`.
-2. Crie sua conta de administrador no primeiro acesso.
-3. Navegue em **Environments > local > Containers** para visualizar a stack `acidentes_bh`.
+docker-compose.yml: Orquestração dos serviços de banco de dados e BI.
 
-## 📁 Estrutura de Pastas
+🧠 Estudo Realizado
+A análise foi dividida em duas grandes camadas:
 
-```text
-.
-├── data/               # Arquivos CSV brutos
-├── scripts/            # Scripts Python de ingestão
-├── sql/                # Scripts SQL e modelagem de DW
-├── .env                # Variáveis de ambiente (não versionar)
-├── docker-compose.yaml # Orquestração dos containers
-└── requirements.txt    # Dependências do projeto
+Painel Estratégico: Focado em KPIs de alto nível, como taxa de fatalidade, evolução anual de acidentes e indicadores de embriaguez com comparação temporal (Year-over-Year).
 
-```
+Painel Analítico: Mergulho profundo nos dados, incluindo:
 
----
+Geolocalização: Mapa de calor dos pontos críticos da cidade.
 
-### Notas:
+Fator Humano: Perfil de idade, gênero e uso de cinto de segurança.
 
-* **Conexão no Metabase:** Ao conectar o Metabase ao banco de dados dentro do ambiente Docker, utilize o host `db` (nome do serviço no compose) em vez de `localhost`.
+Cena do Crime: Análise de horários de pico ("Relógio do Perigo"), condições climáticas e vias com maior incidência.
+
+Projeto desenvolvido como parte da Pós-Graduação em Inteligência Artificial e Machine Learning - PUC Minas.
