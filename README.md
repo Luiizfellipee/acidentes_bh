@@ -1,81 +1,114 @@
-# 📊 Análise de Acidentes de Trânsito em Belo Horizonte (Data Analytics & DW)
+Aqui está a versão **atualizada** do seu README.md com **badges** bem organizados no topo, visualmente atraentes e profissionais:
 
-Este projeto consiste em uma solução completa de Data Analytics para o estudo e visualização de acidentes de trânsito na cidade de Belo Horizonte, utilizando dados abertos da PBH. A solução abrange desde o tratamento de dados (ETL) e modelagem dimensional em um Data Warehouse (PostgreSQL) até a visualização em dashboards interativos no Metabase.
+```markdown
+# 📊 Análise de Acidentes de Trânsito em Belo Horizonte
 
-O objetivo do estudo é identificar padrões críticos, como a influência da embriaguez na letalidade, regiões com maior incidência de colisões e o perfil demográfico dos envolvidos, auxiliando na compreensão da segurança viária urbana.
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-336791?style=for-the-badge&logo=postgresql&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+![Metabase](https://img.shields.io/badge/Metabase-509EE3?style=for-the-badge&logo=metabase&logoColor=white)
+![Pandas](https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white)
+![ETL](https://img.shields.io/badge/ETL-Data%20Pipeline-FF6F00?style=for-the-badge)
+
+> **Data Analytics & Data Warehouse**
+
+Este dashboard foi desenvolvido como projeto prático da **Pós-Graduação em Inteligência Artificial e Machine Learning da PUC Minas**.
+
+O projeto apresenta uma solução completa de Data Analytics para o estudo de acidentes de trânsito na cidade de Belo Horizonte, utilizando dados abertos da Prefeitura de Belo Horizonte (PBH).
+
+A solução inclui desde o tratamento dos dados (ETL), modelagem dimensional em Data Warehouse (PostgreSQL) até a criação de dashboards interativos no Metabase.
+
+**Principais insights explorados:**
+- Influência da embriaguez na letalidade dos acidentes
+- Regiões com maior incidência de colisões
+- Perfil demográfico das vítimas e condutores
+- Padrões temporais e condições que mais geram risco
+
+---
 
 ## 🚀 Conceito Plug and Play
-Este projeto foi desenvolvido sob o conceito Plug and Play. Toda a infraestrutura de banco de dados e a configuração do dashboard (gráficos, filtros e cores) já estão pré-configuradas e persistidas. Ao subir o ambiente, você não precisará criar nenhum gráfico do zero; o painel estará pronto para consumo.
+
+Todo o projeto foi construído com o conceito **Plug and Play**.  
+Ao subir o ambiente, o Data Warehouse e o dashboard já vêm **100% configurados** com gráficos, filtros, cores e visuais prontos. Você não precisa criar nada manualmente.
+
+---
 
 ## 🛠️ Pré-requisitos
-Para rodar este projeto, você precisará apenas de:
 
-Docker e Docker Compose instalados.
+- **Docker** e **Docker Compose** instalados (Docker Desktop recomendado no Windows)
+- *Não é necessário instalar Python ou qualquer outra dependência na máquina hospedeira.*
 
-Python 3.10+ (para execução dos scripts de carga).
+---
 
-## 📥 Instalação e Configuração
-Siga os passos abaixo para subir o ambiente na sua máquina local:
+## 📥 Instalação "One-Click" (Windows)
 
-### 1. Clonar o Repositório
-Bash
-git clone https://github.com/seu-usuario/acidentes_bh.git
+1. Clone o repositório:
+```bash
+git clone https://github.com/Luiizfellipee/acidentes_bh.git
 cd acidentes_bh
+```
 
-### 2. Subir a Infraestrutura (Docker)
-Este comando iniciará os contêineres do banco de dados PostgreSQL e do Metabase.
+2. Execute o arquivo `start_project.bat` (basta dar **dois cliques** no arquivo).
 
-Bash
-docker-compose up -d
+O script automatizado irá:
 
-### 3. Instalar Dependências Python
-Recomenda-se o uso de um ambiente virtual (venv).
+- Solicitar privilégios de administrador
+- Pausar qualquer instância local do PostgreSQL (porta 5432)
+- Iniciar o Docker Desktop (caso esteja fechado)
+- Configurar credenciais via `.env`
+- Subir o Data Warehouse + Metabase
+- Executar o pipeline ETL completo
+- Abrir automaticamente o dashboard no seu navegador
 
-Bash
-pip install -r requirements.txt
-
-### 4. Carga de Dados e Criação de Views
-Execute os scripts para popular o banco de dados e criar as camadas lógicas de análise:
-
-Bash
-### Injeta os dados tratados (.parquet) no Data Warehouse
-python scripts/load_dw.py
-
-### Cria as views otimizadas para o dashboard
-python scripts/create_view.py
+---
 
 ## 📈 Acesso ao Dashboard (Metabase)
-Após os contêineres estarem rodando e os scripts finalizados, o dashboard estará disponível em: http://localhost:3000.
 
-### Credenciais de Primeiro Acesso:
-Utilize os dados abaixo para visualizar os painéis Estratégico e Analítico:
+Após a inicialização, acesse:
 
-Login/Email: devin4237@uorak.com
+**URL:** http://localhost:3000
 
-Senha: xLc9cskkE7Aci5U
+**Credenciais de acesso:**
+- **Login / Email:** `devin4237@uorak.com`
+- **Senha:** `xLc9cskkE7Aci5U`
+
+---
 
 ## 🧩 Estrutura do Projeto
-data/: Contém os dados brutos e os arquivos tratados em formato Parquet para alta performance.
 
-notebooks/: Jupyter Notebook com todo o processo de limpeza, normalização e tratamento de dados (Pandas).
+| Pasta                  | Descrição |
+|------------------------|---------|
+| `data/`                | Dados brutos e arquivos Parquet otimizados |
+| `notebooks/`           | Jupyter Notebooks com exploração e limpeza dos dados |
+| `scripts/`             | Scripts Python usados no pipeline ETL e criação de Views |
+| `metabase_data/`       | Volume persistente com toda configuração do dashboard |
+| `docker-compose.yml`   | Orquestração completa dos serviços |
+| `start_project.bat`    | Script de inicialização automática (Windows) |
 
-scripts/: Scripts Python para automação do pipeline de dados e criação de Views SQL.
-
-metabase_data/: Volume persistente que armazena a inteligência do dashboard (essencial para o Plug and Play).
-
-docker-compose.yml: Orquestração dos serviços de banco de dados e BI.
+---
 
 ## 🧠 Estudo Realizado
-A análise foi dividida em duas grandes camadas:
 
-Painel Estratégico: Focado em KPIs de alto nível, como taxa de fatalidade, evolução anual de acidentes e indicadores de embriaguez com comparação temporal (Year-over-Year).
+O dashboard está dividido em duas camadas principais:
 
-Painel Analítico: Mergulho profundo nos dados, incluindo:
+### Painel Estratégico
+- KPIs gerais de segurança viária
+- Taxa de fatalidade
+- Evolução anual de acidentes
+- Impacto da embriaguez (comparação Year-over-Year)
 
-Geolocalização: Mapa de calor dos pontos críticos da cidade.
+### Painel Analítico
+- **Geolocalização**: Mapa de calor dos pontos críticos da cidade
+- **Fator Humano**: Idade, gênero e uso de equipamentos de segurança
+- **Cena do Acidente**: Horários de pico, condições climáticas e vias mais perigosas
 
-Fator Humano: Perfil de idade, gênero e uso de cinto de segurança.
+---
 
-Cena do Crime: Análise de horários de pico ("Relógio do Perigo"), condições climáticas e vias com maior incidência.
+**Tecnologias utilizadas:**
+- PostgreSQL (Data Warehouse)
+- Docker & Docker Compose
+- Python + Pandas (ETL)
+- Metabase (Business Intelligence)
+- Parquet (armazenamento otimizado)
 
-Projeto desenvolvido como parte da Pós-Graduação em Inteligência Artificial e Machine Learning - PUC Minas.
+---
