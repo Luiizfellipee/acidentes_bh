@@ -1,4 +1,3 @@
-```markdown
 # 📊 Análise de Acidentes de Trânsito em Belo Horizonte
 
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
@@ -42,11 +41,9 @@ Ao subir o ambiente, o Data Warehouse e o dashboard já vêm **100% configurados
 
 1. Clone o repositório:
 ```bash
-git clone https://github.com/Luiizfellipee/acidentes_bh.git
+git clone https://github.com/seu-usuario/acidentes_bh.git
 cd acidentes_bh
 ```
-
-```markdown
 2. Execute o arquivo `start_project.bat` (basta dar **dois cliques** no arquivo).
 
 O script automatizado irá:
@@ -111,4 +108,3 @@ O dashboard está dividido em duas camadas principais:
 - Parquet (armazenamento otimizado)
 
 ---
-```
