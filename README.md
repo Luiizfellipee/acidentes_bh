@@ -1,5 +1,3 @@
-Aqui está a versão **atualizada** do seu README.md com **badges** bem organizados no topo, visualmente atraentes e profissionais:
-
 ```markdown
 # 📊 Análise de Acidentes de Trânsito em Belo Horizonte
 
@@ -48,6 +46,7 @@ git clone https://github.com/Luiizfellipee/acidentes_bh.git
 cd acidentes_bh
 ```
 
+```markdown
 2. Execute o arquivo `start_project.bat` (basta dar **dois cliques** no arquivo).
 
 O script automatizado irá:
@@ -112,3 +111,4 @@ O dashboard está dividido em duas camadas principais:
 - Parquet (armazenamento otimizado)
 
 ---
+```
