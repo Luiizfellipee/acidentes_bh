@@ -18,7 +18,7 @@ def criar_views_metabase():
     password = os.getenv("DB_PASSWORD")
     db_name = os.getenv("DB_NAME")
     port = os.getenv("DB_PORT", "5432")
-    host = "localhost" 
+    host = os.getenv("DB_HOST", "db")
     
     db_uri = f"postgresql+psycopg2://{user}:{password}@{host}:{port}/{db_name}"
     engine = create_engine(db_uri)

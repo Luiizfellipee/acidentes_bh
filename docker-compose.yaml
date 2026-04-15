@@ -13,6 +13,11 @@ services:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
 
   metabase:
     image: metabase/metabase:latest
@@ -25,7 +30,24 @@ services:
     environment:
       MB_DB_FILE: /metabase-data/metabase.db
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+
+  etl_python:
+    image: python:3.11-slim
+    container_name: python_etl_acidentes
+    depends_on:
+      db:
+        condition: service_healthy
+    # Conecta a pasta do seu computador para dentro do Docker
+    volumes:
+      - .:/app
+    working_dir: /app
+    # Instala os pacotes e roda os seus scripts
+    command: >
+      bash -c "pip install --no-cache-dir -r requirements.txt &&
+               python scripts/load_dw.py &&
+               python scripts/create_view.py"
 
 volumes:
   pgdata:

@@ -1,0 +1,20 @@
+# ==========================================
+# Credenciais do Banco de Dados
+# ==========================================
+DB_USER=admin
+DB_PASSWORD=suasenha
+DB_NAME=acidentes_db
+
+# ==========================================
+# Configurações de Conexão (Acesso Externo)
+# ==========================================
+
+DB_HOST=db
+DB_PORT=5432
+
+# URL de conexão completa
+DATABASE_URL=postgresql://admin:acidentesbh@localhost:5432/acidentes_db
+
+Para acessar o Metabase insira as seguintes credenciais:
+Login/Email: devin4237@uorak.com
+Senha: xLc9cskkE7Aci5U
